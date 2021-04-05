@@ -1,0 +1,42 @@
+<%= form_with(model: frame, local: true) do |form| %>
+  <% if frame.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(frame.errors.count, "error") %> prohibited this frame from being saved:</h2>
+
+      <ul>
+        <% frame.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :session_id %>
+    <%= form.text_field :session_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :frame %>
+    <%= form.number_field :frame %>
+  </div>
+
+  <div class="field">
+    <%= form.label :knocked_pins %>
+    <%= form.number_field :knocked_pins %>
+  </div>
+
+  <div class="field">
+    <%= form.label :turn %>
+    <%= form.number_field :turn %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

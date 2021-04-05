@@ -1,0 +1,16 @@
+<h1>Type players name</h1>
+<%
+=begin%>
+
+<%= render 'form', player: @player %>
+<%
+=end%>
+<h2>Players left: <%= @players_left %></h2>
+<%= form_for @player do |form| %>
+<%= form.text_field :name ,placeholder: "Player name" %><br><br>
+<%= form.hidden_field :session_id,:value=> @session_id %> 
+<%= form.hidden_field :score,:value=> 0 %> 
+<%= form.hidden_field :session_winner,:value=> false %> 
+<%= form.submit 'Create' %>
+<% end %>
+<%= link_to 'Back', players_path %>

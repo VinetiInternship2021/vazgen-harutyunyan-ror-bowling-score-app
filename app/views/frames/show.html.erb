@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @frame.user_id %>
+</p>
+
+<p>
+  <strong>Session:</strong>
+  <%= @frame.session_id %>
+</p>
+
+<p>
+  <strong>Frame:</strong>
+  <%= @frame.frame %>
+</p>
+
+<p>
+  <strong>Knocked pins:</strong>
+  <%= @frame.knocked_pins %>
+</p>
+
+<p>
+  <strong>Turn:</strong>
+  <%= @frame.turn %>
+</p>
+
+<%= link_to 'Edit', edit_frame_path(@frame) %> |
+<%= link_to 'Back', frames_path %>

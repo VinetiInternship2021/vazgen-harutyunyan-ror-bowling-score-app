@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+<style>
+    .players-wrapper {
+        margin-top: 25px;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .player-row {
+        display: grid;
+        height: 100px;
+        width: 100%;
+        grid-template-columns: repeat(4,1fr) 2fr;
+        grid-template-rows: 100%;
+    }
+</style>
+<p>
+    <strong>Players count:</strong>
+    <%= @session.players_count %>
+</p>
+<p>
+    <strong>10 points is strike</strong>
+</p>
+<div class="players-wrapper">
+    <% @players.each do |player| -%>
+    <div class="player-row">
+        <div>Name: <strong><%= player.name %></strong> </div>
+        <div>Score: <strong><%= player.score %></strong> </div>
+        <div>Frame: <strong><%=  player.last_frame.present? ? player.last_frame[0].frame : 0 %></strong> </div>
+        <div>Shot: <strong><%=    player.last_frame.present? ? player.last_frame[0].turn : 0 %></strong> </div>
+        <div>
+            <%
+=begin%>
+ <%= form_tag( "/frames/update_score/" ,method: 'post', remote: true) do |form| %> 
+<%
+=end%>
+            <%= form_for  @frame,:url => url_for(:controller => 'frames', :action => 'create') do |form| %>
+              <%= form.label :score, "Play: Add frame score from 0 to 10"  %>
+              <%= form.number_field :knocked_pins %>
+              <%= form.hidden_field :player_id, value: player.id %>
+              <%= form.hidden_field :frame, value: (player.last_frame.present? ? player.last_frame[0].frame : 0) + 1 %>
+              <%= form.hidden_field :turn, value: (player.last_frame.present? ? player.last_frame[0].turn : 0) + 1 %>
+              <%= form.submit "Add score" %>
+            <% end %>
+        </div>  
+    </div>
+    <% end -%>
+</div>
+<%
+=begin%>
+<%= link_to 'Edit', edit_session_path(@session) %> |
+<%
+=end%>
+<%= link_to 'Back', sessions_path %>
