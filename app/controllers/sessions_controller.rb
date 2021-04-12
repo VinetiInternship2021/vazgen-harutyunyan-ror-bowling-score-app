@@ -8,22 +8,15 @@ class SessionsController < ApplicationController
 
   # GET /sessions/1 or /sessions/1.json
   def show
+
     @frame = Frame.new
-
-    @players = Player
-    .select("PLAYERS.*, LAST_FRAME.*")
-    .joins('LEFT OUTER JOIN (SELECT * FROM FRAMES GROUP BY PLAYER_ID ORDER BY FRAMES.FRAME DESC, FRAMES.TURN DESC LIMIT 1) as LAST_FRAME ON LAST_FRAME.player_id = PLAYERS.id')
-    .where({session:params[:id]})
-    # .order('LAST_FRAME.FRAME DESC, LAST_FRAME.TURN DESC')
-
-    puts @players.inspect()
+    
+    @players = Player.where({session:params[:id]})
+    
+   
+    
   end
 
-  # #POST /sessions/update_score
-  # def update_score
-    
-  #   Frame.new({knocked_pins:params[:score],player:params[:player_id],frame:params[:last_frame] + 1,turn:params[:last_turn] + 1})
-  # end
 
   # GET /sessions/new
   def new

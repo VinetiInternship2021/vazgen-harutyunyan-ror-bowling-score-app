@@ -38,6 +38,6 @@ ActiveRecord::Schema.define(version: 2021_03_28_001939) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "frames", "players"
-  add_foreign_key "players", "sessions"
+  add_foreign_key "frames", "players", on_delete: :cascade
+  add_foreign_key "players", "sessions", on_delete: :cascade
 end

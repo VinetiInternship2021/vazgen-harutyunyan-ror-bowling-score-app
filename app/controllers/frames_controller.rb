@@ -21,7 +21,7 @@ class FramesController < ApplicationController
 
   # POST /frames or /frames.json
   def create
-    @frame = Frame.new(frame_params)
+    @frame = Frame.new({knocked_pins:frame_params[:knocked_pins],frame:frame_params[:frame],turn:frame_params[:turn],player_id:frame_params[:player_id]})
 
     respond_to do |format|
       if @frame.save
